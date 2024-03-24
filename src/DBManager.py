@@ -52,9 +52,22 @@ class DBManager:
                             url varchar
                         )''')
                 cur.close()
+        conn.close()
 
+    def add_employer(self, employer):
+        with psycopg2.connect(
+                host='localhost',
+                database='hh_api',
+                user='postgres',
+                password='Oblivion94$'
+        ) as conn:
+            conn.autocommit = True
+            with conn.cursor() as cur:
 
+                cur.execute('INSERT INTO employer VALUES (%s, %s, %s, %s)', (employer.id, employer.name, employer.site_url, employer.description))
 
+                cur.close()
+        conn.close()
 
 
 
