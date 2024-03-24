@@ -38,7 +38,8 @@ class Vacancy:
                  s_currency,
                  t_name,
                  address,
-                 published_at
+                 published_at,
+                 url
                  ):
         self.id = id
         self.name = name
@@ -49,6 +50,7 @@ class Vacancy:
         self.t_name = t_name
         self.address = address
         self.published_at = published_at
+        self.url = url
 
 
 employer_id = '68587'
@@ -77,11 +79,15 @@ vacancy = Vacancy(
     content['items'][0]['salary']['currency'],
     content['items'][0]['type']['name'],  # тип вакансии(открытая/закрытая)(t_name)
     content['items'][0]['address'],
-    content['items'][0]['published_at']
+    content['items'][0]['published_at'],
+    content['items'][0]['url']['alternate_url']
 )
-print(vacancy.id, vacancy.name, vacancy.area, vacancy.s_from, vacancy.s_to, vacancy.s_currency, vacancy.t_name,
-      vacancy.address, vacancy.published_at, sep='\n')
+#
+# print(employer.id, employer.name, employer.description, employer.site_url, sep='\n')
 
+# print(vacancy.id, vacancy.name, vacancy.area, vacancy.s_from, vacancy.s_to, vacancy.s_currency, vacancy.t_name,
+#       vacancy.address, vacancy.published_at, sep='\n')
+print(content['items'])
 # id работодателей:
 #
 # 3144945 - Ростелеком
