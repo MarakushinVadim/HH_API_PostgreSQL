@@ -68,6 +68,8 @@ class Vacancy:
 # employer = Employer(emp['id'], emp['name'], emp['description'],
 #                     emp['site_url'])  # создаем обьект класса Employer на основании информации о компании
 # #
+#
+# content['items'][0]['published_at'] = content['items'][0]['published_at'][0:10] + ' ' + content['items'][0]['published_at'][11:19]
 # vacancy = Vacancy(
 #     content['items'][0]['id'],
 #     content['items'][0]['name'],
@@ -76,7 +78,6 @@ class Vacancy:
 #     content['items'][0]['salary']['to'],
 #     content['items'][0]['salary']['currency'],
 #     content['items'][0]['type']['name'],  # тип вакансии(открытая/закрытая)(t_name)
-#     content['items'][0]['address'],
 #     content['items'][0]['published_at'],
 #     content['items'][0]['alternate_url']
 # )
@@ -84,7 +85,9 @@ class Vacancy:
 # # print(employer.id, employer.name, employer.description, employer.site_url, sep='\n')
 #
 # print(vacancy.id, vacancy.name, vacancy.area, vacancy.s_from, vacancy.s_to, vacancy.s_currency, vacancy.t_name,
-#       vacancy.address, vacancy.published_at, vacancy.url, sep='\n')
+#       vacancy.published_at, vacancy.url, sep='\n')
+#
+# print(type(vacancy.published_at))
 # print(content['items'])
 # id работодателей:
 #

@@ -19,13 +19,6 @@ if __name__ == '__main__':
         table.add_employer(employer)
 
 
-
-        # print(employer.id, employer.name, employer.description, employer.site_url, sep='\n')
-        #
-        # print(f'длинна {len(vac)}')
-
-
-
         for item in vac['items']:
             if item['salary'] is None:
                 item['salary'] = {'from': None, 'to': None, 'currency': 'не указано', 'gross': True}
@@ -33,6 +26,7 @@ if __name__ == '__main__':
                 pass
 
         for item in vac['items']:
+            item['published_at'] = item['published_at'][0:10] + ' ' + item['published_at'][11:19]
             vacancy = Vacancy(
                 item['id'],
                 item['name'],
@@ -45,8 +39,9 @@ if __name__ == '__main__':
                 item['alternate_url']
             )
 
-            vacancy_list.append(vacancy)
-            print(vacancy.id, vacancy.name, vacancy.area, vacancy.s_from, vacancy.s_to, vacancy.s_currency, vacancy.t_name, vacancy.published_at, vacancy.url)
+            table.add_vacancy(employer, vacancy)
+            # vacancy_list.append(vacancy)
+            # print(vacancy.id, vacancy.name, vacancy.area, vacancy.s_from, vacancy.s_to, vacancy.s_currency, vacancy.t_name, vacancy.published_at, vacancy.url)
 
 
         print(vacancy_list)

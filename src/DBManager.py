@@ -47,7 +47,6 @@ class DBManager:
                             salary_to int,
                             salary_cur varchar,
                             vacancy_type varchar,
-                            address text,
                             published_at timestamp,
                             url varchar
                         )''')
@@ -69,6 +68,31 @@ class DBManager:
                 cur.close()
         conn.close()
 
+
+    def add_vacancy(self, employer, vacancy):
+        with psycopg2.connect(
+                host='localhost',
+                database='hh_api',
+                user='postgres',
+                password='Oblivion94$'
+        ) as conn:
+            conn.autocommit = True
+            with conn.cursor() as cur:
+
+                cur.execute('INSERT INTO vacancy VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (vacancy.id,
+                                                                                                        vacancy.name,
+                                                                                                        employer.name,
+                                                                                                        vacancy.area,
+                                                                                                        vacancy.s_from,
+                                                                                                        vacancy.s_to,
+                                                                                                        vacancy.s_currency,
+                                                                                                        vacancy.t_name,
+                                                                                                        vacancy.published_at,
+                                                                                                        vacancy.url
+                                                                                                        ))
+
+                cur.close()
+        conn.close()
 
 
 table = DBManager()
