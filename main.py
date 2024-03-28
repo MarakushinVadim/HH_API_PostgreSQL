@@ -2,7 +2,7 @@ from src.DBManager import DBManager
 from src.HH_API import HeadHunterAPI, Employer, Vacancy
 
 if __name__ == '__main__':
-
+    # Создаем базу данных и таблицы
     table = DBManager()
     table.create_db()
     table.create_tables()
@@ -10,7 +10,7 @@ if __name__ == '__main__':
     progress = 10
 
     print('Началась обработка данных, дождитесь окончания')
-
+    # Начинаем перебирать список огранизаций и их вакансий
     employers_id = ['3144945', '9280639', '68587', '1545815', '1729433', '4614421', '3127', '3776', '78638', '47858']
     for employer_id in employers_id:
         hh_api = HeadHunterAPI(employer_id)
@@ -19,10 +19,12 @@ if __name__ == '__main__':
         employer = Employer(emp['id'], emp['name'], emp['description'], emp['site_url'])
         vacancy_list = []
 
+        # Добавляем компанию в таблицу
         table.add_employer(employer)
 
         for item in vac['items']:
 
+            # Редактируем значение Salary
             if item['salary'] is None:
                 item['salary'] = {'from': 0, 'to': 0, 'currency': 'не указано', 'gross': True}
 
@@ -49,6 +51,7 @@ if __name__ == '__main__':
                 item['alternate_url']
             )
 
+            # Добавляем вакансии в таблицу
             table.add_vacancy(employer, vacancy)
 
         print(f'{progress}%')
@@ -57,12 +60,13 @@ if __name__ == '__main__':
     print('Данные загружены, спасибо за ожидание!')
     print()
 
+    # Создаем 
     all_vacancy_count = table.get_companies_and_vacancies_count()
     all_vacancy = table.get_all_vacancies()
     avg_salary = table.get_avg_salary()
     higher_salary = table.get_vacancies_with_higher_salary()
-    choice = 0
-
+    
+    # Запускаем цикл
     while True:
         print(f'1. - список всех компаний и количество вакансий у каждой компании ''\n'
               f'2. - список всех вакансий''\n'
